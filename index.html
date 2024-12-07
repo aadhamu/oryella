@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oryella - Luxury Women's Handbags</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Lora', serif;
+      background-color: #fdfdfd;
+      color: #000000;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h5 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .navbar-dark .navbar-brand, .navbar-dark .nav-link {
+      color: #ffffff;
+    }
+
+    .navbar-dark .nav-link:hover {
+      text-decoration: underline;
+      color: #f0c14b;
+    }
+
+    /* Fullscreen Mobile Menu */
+    .fullscreen-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      color: #fff;
+      z-index: 1050;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+
+    .fullscreen-menu.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .fullscreen-menu .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .fullscreen-menu .nav-link {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin: 15px 0;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: url('img/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .hero .btn {
+      font-size: 1.2rem;
+      padding: 10px 30px;
+      border-radius: 50px;
+    }
+
+    /* New Arrivals Section */
+    #new-arrivals h2 {
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Product Details Modal */
+    #productDetails {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      z-index: 1050;
+      overflow-y: auto;
+      padding: 40px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #productDetails .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    #productDetails .modal-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #productDetails .modal-image {
+      flex: 1;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    #productDetails .modal-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #productDetails .modal-description {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    #productDetails h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    #productDetails .color-circle {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 1px solid #000;
+    }
+
+    #productDetails .btn-success {
+      margin-top: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-right: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #f0c14b;
+    }
+
+    /* Back to Top Button */
+    #backToTopButton {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #backToTopButton:hover {
+      background: #f0c14b;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark bg-black py-3">
+    <div class="container">
+      <a class="navbar-brand text-uppercase fw-bold" href="#">Oryella</a>
+      <button class="navbar-toggler" type="button" id="hamburgerMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Fullscreen Menu -->
+  <div id="fullscreenMenu" class="fullscreen-menu">
+    <span class="close-btn">&times;</span>
+    <a class="nav-link" href="#new-arrivals">New Arrivals</a>
+    <a class="nav-link" href="#collections">Collections</a>
+    <a class="nav-link" href="#contact">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1>Luxury Redefined</h1>
+      <p>Discover elegance with Oryella's exclusive handbag collection.</p>
+      <a href="#new-arrivals" class="btn btn-outline-light">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- New Arrivals Section -->
+  <section id="new-arrivals" class="py-5">
+    <div class="container">
+      <h2>New Arrivals</h2>
+      <div class="row">
+        <!-- Handbag -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="https://media.istockphoto.com/id/1271796113/photo/women-is-holding-handbag-near-luxury-car.webp?a=1&b=1&s=612x612&w=0&k=20&c=x8oxK-1ByIUdks4SIndcB49L7JXIHgwsenGpEt7B1tk=" class="card-img-top" alt="Handbag">
+            <div class="card-body text-center">
+              <h5 class="card-title">Classic Leather Bag</h5>
+              <p class="card-text">₦120,000</p>
+              <button class="btn btn-dark view-details" data-name="Classic Leather Bag" data-image="https://media.istockphoto.com/id/1271796113/photo/women-is-holding-handbag-near-luxury-car.webp?a=1&b=1&s=612x612&w=0&k=20&c=x8oxK-1ByIUdks4SIndcB49L7JXIHgwsenGpEt7B1tk=" data-description="This is a premium leather bag perfect for any occasion. Made with premium leather for durability and style. Dimensions: 30x20x10 cm." data-colors="#000000,#A0522D">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Details Modal -->
+  <div id="productDetails">
+    <span class="close-btn">&times;</span>
+    <div class="modal-content">
+      <div class="modal-image">
+        <img src="" id="productImage" alt="Product Image">
+      </div>
+      <div class="modal-description">
+        <h2 id="productName"></h2>
+        <p id="productDescription"></p>
+        <p><strong>Available Colors:</strong></p>
+        <div id="productColors"></div>
+        <a href="#" id="whatsappLink" class="btn btn-success"><i class="fab fa-whatsapp"></i> Contact Us via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row text-center text-md-start">
+        <div class="col-md-4">
+          <h5>About Oryella</h5>
+          <p>Experience luxury redefined with our exclusive handbags.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a href="#new-arrivals">New Arrivals</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 text-center text-md-start">
+          <h5>Follow Us</h5>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopButton">&#8679;</button>
+
+  <!-- JavaScript -->
+  <script>
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const fullscreenMenu = document.getElementById('fullscreenMenu');
+    const closeFullscreenMenu = fullscreenMenu.querySelector('.close-btn');
+
+    hamburgerMenu.addEventListener('click', () => {
+      fullscreenMenu.classList.add('active');
+    });
+
+    closeFullscreenMenu.addEventListener('click', () => {
+      fullscreenMenu.classList.remove('active');
+    });
+
+    const detailsButtons = document.querySelectorAll('.view-details');
+    const productDetails = document.getElementById('productDetails');
+    const productImage = document.getElementById('productImage');
+    const productName = document.getElementById('productName');
+    const productDescription = document.getElementById('productDescription');
+    const productColors = document.getElementById('productColors');
+    const whatsappLink = document.getElementById('whatsappLink');
+    const closeModal = productDetails.querySelector('.close-btn');
+
+    detailsButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const name = button.getAttribute('data-name');
+        const image = button.getAttribute('data-image');
+        const description = button.getAttribute('data-description');
+        const colors = button.getAttribute('data-colors').split(',');
+
+        productName.textContent = name;
+        productImage.src = image;
+        productDescription.textContent = description;
+        productColors.innerHTML = colors.map(color => `<span class="color-circle" style="background-color:${color}"></span>`).join('');
+        whatsappLink.href = `https://wa.me/2341234567890?text=I'm interested in the ${name}.`;
+
+        productDetails.style.display = 'block';
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      productDetails.style.display = 'none';
+    });
+
+    // Back to Top Button
+    const backToTopButton = document.getElementById('backToTopButton');
+    window.onscroll = () => {
+      if (document.documentElement.scrollTop > 200) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    };
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
